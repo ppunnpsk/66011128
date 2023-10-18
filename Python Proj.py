@@ -29,14 +29,13 @@ class RouletteGame:
 
  
     global adjusted_bankroll
-   global prob
     def adjusted_bankroll(self, result, bet_val, bet_type):
         bet = int(input("How much do you want to bet?: "))
 
         if bet < 10:
             print("Minimum bet is $10. Game over!")
             return
-
+        global prob
         self.bankroll -= bet
         prob = "47.37%"
 
