@@ -188,16 +188,7 @@ def adjusted_bankroll(spins_result, balance, bet_val):
 global slots
 keep_playing = 'yes'
 while (keep_playing.lower() == 'yes') or (keep_playing.lower() == 'y'):
-    while True:
-        try:
-            bet = int(input("How much do you want to bet?: "))
-            if bet < 10:
-                print("Minimum bet is $10. Please enter a valid amount.")
-            else:
-                break  # Exit the loop if the input is valid
-        except ValueError:
-            print("Please enter a valid number.")
-    
+    bet = int(input("How much do you want to bet?: "))
     total_bet += bet  # Track total bet
     bet_type = int(input("What type of bet? Choose one of the given numbers:\n"
                         "1 = Even/Odd\n"
@@ -218,7 +209,7 @@ while (keep_playing.lower() == 'yes') or (keep_playing.lower() == 'y'):
 
 
     print("\nThe winning number is: %s %s !" % (result, color))
-    if bankroll < 10:
+    if bankroll < 10 or balance < 10:
         print(prompt)
         print("Sorry, minimum bet is 10 dollars, please deposit for more fun >_<. Game over!")
         break
