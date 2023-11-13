@@ -206,20 +206,20 @@ while (keep_playing.lower() == 'yes') or (keep_playing.lower() == 'y'):
         total_bet += bet  # Track total bet
 
         bet_type = int(input("What type of bet? Choose one of the given numbers:\n"
-                             "1 = Even/Odd\n"
-                             "2 = Red/Black\n"
-                             "3 = First Twelve (1-12)\n"
-                             "4 = Second Twelve (13-24)\n"
-                             "5 = Third Twelve (25-36)\n"
-                             "6 = First Eighteen (1-18)\n"
-                             "7 = Second Eighteen (19-36)\n"
-                             "8 = Combination of Two Numbers\n"
-                             "9 = Combination of Three Numbers\n"
-                             "10 = Combination of Four Numbers\n"
-                             "11 = Combination of Six Numbers\n"
-                             "12 = Combination of 1-2-3-0-00\n"
-                             "13 = One Number (Straight Up)\n"
-                             "Choose number: "))
+                            "1 = Even/Odd\n"
+                            "2 = Red/Black\n"
+                            "3 = First Twelve (1-12)\n"
+                            "4 = Second Twelve (13-24)\n"
+                            "5 = Third Twelve (25-36)\n"
+                            "6 = First Eighteen (1-18)\n"
+                            "7 = Second Eighteen (19-36)\n"
+                            "8 = Combination of Two Numbers\n"
+                            "9 = Combination of Three Numbers\n"
+                            "10 = Combination of Four Numbers\n"
+                            "11 = Combination of Six Numbers\n"
+                            "12 = Combination of 1-2-3-0-00\n"
+                            "13 = One Number (Straight Up)\n"
+                            "Choose number: "))
         if bet_type not in range(1, 14):
             print("Invalid bet type. Please choose a number between 1 and 13.")
             continue
