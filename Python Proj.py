@@ -1,6 +1,16 @@
 import random
 
-bankroll = int(input("What is your starting balance (in whole $$): "))
+bankroll = 0
+while True:
+    try:
+        bankroll = int(input("What is your starting balance (in whole $$): "))
+        if bankroll < 10:
+            print("Sorry, the minimum starting balance is $10. Please enter a valid amount.")
+        else:
+            break
+    except ValueError:
+        print("Invalid input. Please enter a valid whole number.")
+
 total_win = 0
 total_bet = 0
 
@@ -188,38 +198,53 @@ def adjusted_bankroll(spins_result, balance, bet_val):
 global slots
 keep_playing = 'yes'
 while (keep_playing.lower() == 'yes') or (keep_playing.lower() == 'y'):
-    bet = int(input("How much do you want to bet?: "))
-    total_bet += bet  # Track total bet
-    bet_type = int(input("What type of bet? Choose one of the given numbers:\n"
-                        "1 = Even/Odd\n"
-                        "2 = Red/Black\n"
-                        "3 = First Twelve (1-12)\n"
-                        "4 = Second Twelve (13-24)\n"
-                        "5 = Third Twelve (25-36)\n"
-                        "6 = First Eighteen (1-18)\n"
-                        "7 = Second Eighteen (19-36)\n"
-                        "8 = Combination of Two Numbers\n"
-                        "9 = Combination of Three Numbers\n"
-                        "10 = Combination of Four Numbers\n"
-                        "11 = Combination of Six Numbers\n"
-                        "12 = Combination of 1-2-3-0-00\n"
-                        "13 = One Number (Straight Up)"))
-    (result, color, slots) = spins()
-    (prompt, balance) = adjusted_bankroll((result, color, slots), bankroll, bet_value(bet_type))
+    try:
+        bet = int(input("How much do you want to bet?: "))
+        if bet < 10:
+            print("Sorry, the minimum bet is $10. Please enter a valid amount.")
+            continue
+        total_bet += bet  # Track total bet
 
+        bet_type = int(input("What type of bet? Choose one of the given numbers:\n"
+                             "1 = Even/Odd\n"
+                             "2 = Red/Black\n"
+                             "3 = First Twelve (1-12)\n"
+                             "4 = Second Twelve (13-24)\n"
+                             "5 = Third Twelve (25-36)\n"
+                             "6 = First Eighteen (1-18)\n"
+                             "7 = Second Eighteen (19-36)\n"
+                             "8 = Combination of Two Numbers\n"
+                             "9 = Combination of Three Numbers\n"
+                             "10 = Combination of Four Numbers\n"
+                             "11 = Combination of Six Numbers\n"
+                             "12 = Combination of 1-2-3-0-00\n"
+                             "13 = One Number (Straight Up)\n"
+                             "Choose number: "))
+        if bet_type not in range(1, 14):
+            print("Invalid bet type. Please choose a number between 1 and 13.")
+            continue
 
-    print("\nThe winning number is: %s %s !" % (result, color))
-    if bankroll < 10 or balance < 10:
-        print(prompt)
-        print("Sorry, minimum bet is 10 dollars, please deposit for more fun >_<. Game over!")
-        break
-    else:
-        print(prompt)
+        (result, color, slots) = spins()
+        (prompt, balance) = adjusted_bankroll((result, color, slots), bankroll, bet_value(bet_type))
+
+        print("\nThe winning number is: %s %s !" % (result, color))
+        if bankroll < 10 or balance < 10:
+            print(prompt)
+            print("Sorry, the minimum bet is $10. Please deposit for more fun >_<. Game over!")
+            break
+        else:
+            print(prompt)
+            total_win += (balance - bankroll)  # Track total win
+            bankroll = balance
+            print("\nTotal Wins: $%s" % total_win)
+            print("Total Bets: $%s" % total_bet)
+
         total_win += (balance - bankroll)  # Track total win
         bankroll = balance
-        print("\nTotal Wins: $%s" % total_win)
-        print("Total Bets: $%s" % total_bet)
-        
-    total_win += (balance - bankroll)  # Track total win
-    bankroll = balance
-    keep_playing = input("Would you like to keep playing? (Y/N): ")
+        keep_playing = input("Would you like to keep playing? (Y/N): ")
+        if keep_playing.lower() not in ['yes', 'y', 'no', 'n']:
+            print("Invalid option. Please enter 'Y' or 'N'.")
+            break
+
+    except ValueError:
+        print("Invalid input. Please enter a valid whole number.")
