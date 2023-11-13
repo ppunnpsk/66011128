@@ -200,8 +200,10 @@ keep_playing = 'yes'
 while (keep_playing.lower() == 'yes') or (keep_playing.lower() == 'y'):
     try:
         bet = int(input("How much do you want to bet?: "))
-        if bet < 10:
+        if bet < 10 :
             print("Sorry, the minimum bet is $10. Please enter a valid amount.")
+        elif bet > bankroll:
+            print("Sorry, you can't bet more than you have")
             continue
         total_bet += bet  # Track total bet
 
